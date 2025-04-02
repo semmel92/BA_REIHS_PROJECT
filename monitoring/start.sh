@@ -1,5 +1,4 @@
-!#bin/bash
-
+#!/bin/bash
 
 echo ""
 echo "🔍 Überprüfe Voraussetzungen..."
@@ -25,12 +24,25 @@ echo ""
 echo "🧹 Beende evtl. laufende Container..."
 docker-compose down
 
+# Spring Boot Projekte bauen
+echo ""
+echo "🛠️ Baue Spring Boot Projekte..."
+
+if [ -f "../myservice/gradlew" ]; then
+  echo "🔧 Baue myservice..."
+  (cd ../myservice && ./gradlew bootJar)
+fi
+
+if [ -f "../backend-a/gradlew" ]; then
+  echo "🔧 Baue backend-a..."
+  (cd ../backend-a && ./gradlew bootJar)
+fi
+
 # Compose starten
 echo ""
 echo "🔄 Starte Docker-Umgebung neu..."
 docker-compose up --build -d
 
-# Kurze Pause, damit Container auch wirklich starten
 sleep 5
 
 # URLs
@@ -40,7 +52,6 @@ MY_SERVICE_URL="http://localhost:8080/hello"
 METRICS_URL="http://localhost:8080/actuator/prometheus"
 NODE_EXPORTER_URL="http://localhost:9100/metrics"
 
-# Übersicht ausgeben
 echo ""
 echo "✅ Umgebung ist aktiv. Die wichtigsten Endpunkte:"
 echo "----------------------------------------------"
@@ -51,7 +62,7 @@ echo "📈 Metriken:       $METRICS_URL"
 echo "🧠 Node Exporter:  $NODE_EXPORTER_URL"
 echo ""
 
-# Tabs im Windows-Browser öffnen über powershell.exe
+# Browser-Tabs öffnen (nur unter Windows/WSL)
 echo "🌐 Öffne $PROM_URL im Windows-Browser..."
 powershell.exe start "$PROM_URL"
 echo "🌐 Öffne $GRAFANA_URL im Windows-Browser..."
