@@ -26,17 +26,8 @@ docker-compose down
 
 # Spring Boot Projekte bauen
 echo ""
-echo "🛠️ Baue Spring Boot Projekte..."
-
-if [ -f "../myservice/gradlew" ]; then
-  echo "🔧 Baue myservice..."
-  (cd ../myservice && ./gradlew bootJar)
-fi
-
-if [ -f "../backend-a/gradlew" ]; then
-  echo "🔧 Baue backend-a..."
-  (cd ../backend-a && ./gradlew bootJar)
-fi
+echo "🛠️ Baue Spring Boot Projekte über Root-Wrapper..."
+(cd .. && ./gradlew :myservice:bootJar :backend-a:bootJar)
 
 # Compose starten
 echo ""
