@@ -27,7 +27,7 @@ docker-compose down
 # Spring Boot Projekte bauen
 echo ""
 echo "🛠️ Baue Spring Boot Projekte über Root-Wrapper..."
-(cd .. && ./gradlew clean :myservice:bootJar :backend-a:bootJar)
+(cd .. && ./gradlew clean :myservice:bootJar :backend-a:bootJar :backend-b:bootJar)
 
 
 # Compose starten
