@@ -1,4 +1,4 @@
-package com.example.backend_a;
+package com.example.backend_b;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +8,6 @@ public class BackendBController {
 
     @GetMapping("/data")
     public String getData() {
-        return "Antwort von Backend A";
+        return "Antwort von Backend B";
     }
 }

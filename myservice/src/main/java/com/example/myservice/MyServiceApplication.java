@@ -2,18 +2,12 @@ package com.example.myservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.retry.annotation.EnableRetry;
 
 @SpringBootApplication
-@RestController
+@EnableRetry 
 public class MyServiceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(MyServiceApplication.class, args);
-    }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello from MyService!";
     }
 }

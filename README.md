@@ -2,13 +2,17 @@
 
 ## 🔧 Projektüberblick
 
-Dieses Projekt stellt eine Microservice-Architektur mit Monitoring-Setup dar. Ziel ist es, Retries, Circuit Breaker und Load Balancing experimentell zu analysieren. Grundlage bildet ein Setup mit Spring Boot, Prometheus, Grafana und Node Exporter.
+Dieses Projekt stellt eine Microservice-Architektur mit integriertem Monitoring und vorbereiteten Resilienzstrategien dar. Ziel ist es, **Retries**, **Circuit Breaker** und **Load Balancing** experimentell zu untersuchen. Grundlage bildet ein Setup mit **Spring Boot**, **Prometheus**, **Grafana** und **Node Exporter**.
+
+Die Resilienzstrategien sind bewusst **modular und deaktivierbar** gehalten (z. B. über Profile), um realitätsnahe Tests zu ermöglichen.
 
 ## 🐳 Container & Dienste
 
 | Container       | Port    | Beschreibung |
 |-----------------|---------|--------------|
-| `myservice`     | 8080    | Einfacher Spring Boot Service mit Prometheus Metriken |
+| `myservice`     | 8080    | Zentraler Service, der andere Backends aufruft (`/call-a`, `/call-b`) |
+| `backend-a`     | 8081    | Simpler Backend-Service A (`/data`) |
+| `backend-b`     | 8082    | Simpler Backend-Service B (`/data`) |
 | `prometheus`    | 9090    | Sammelt und speichert Metriken |
 | `grafana`       | 3000    | Visualisiert Metriken aus Prometheus |
 | `node-exporter` | 9100    | Exportiert Systemmetriken des Hosts |
@@ -17,14 +21,19 @@ Dieses Projekt stellt eine Microservice-Architektur mit Monitoring-Setup dar. Zi
 
 ```
 BA_REIHS_PROJECT/
-├── monitoring/                 
+├── backend-a/
+├── backend-b/
+├── myservice/
+│   ├── src/main/java/com/example/myservice/
+│   ├── src/main/resources/application.yml
+│   └── ...
+├── monitoring/
 │   ├── docker-compose.yml
 │   ├── grafana/
 │   │   ├── dashboards/
 │   │   └── provisioning/
 │   ├── prometheus.yml
-├── myservice/                  
-│   └── ...
+│   └── .env (Profilsteuerung für Resilienzstrategien)
 ├── start.sh / stop.sh / reset.sh
 ├── README.md
 ```
@@ -33,17 +42,17 @@ BA_REIHS_PROJECT/
 
 ### 🔹 Prometheus
 - Open-Source Monitoring & Alerting
-- Abfrage via PromQL
 - Pull-Modell: Fragt Endpunkte aktiv ab (`/actuator/prometheus`)
+- Abfragen über PromQL
 
 ### 🔹 Grafana
-- Visualisierung der Prometheus-Daten
+- Visualisiert Metriken aus Prometheus
 - Dashboards werden automatisch provisioniert
-- Läuft auf: [http://localhost:3000](http://localhost:3000)
+- Standard-Zugang: [http://localhost:3000](http://localhost:3000)
 
 ### 🔹 Node Exporter
 - Exportiert Host-Metriken (CPU, RAM, Disk, Netzwerk)
-- Standard-Metrik-Endpoint: [http://localhost:9100/metrics](http://localhost:9100/metrics)
+- Endpunkt: [http://localhost:9100/metrics](http://localhost:9100/metrics)
 
 ## 📊 Glossar zentraler Prometheus-Metriken
 
@@ -59,18 +68,34 @@ BA_REIHS_PROJECT/
 ## 🚀 Starten
 
 ```bash
-./start.sh   # Startet alle Container & öffnet Browser
+./start.sh
 ```
+
+Das Skript:
+- fragt beim ersten Start, ob Retry aktiviert werden soll
+- speichert die Auswahl in `.env`
+- startet alle Container & öffnet wichtige Endpunkte im Browser
 
 ## 🧹 Stoppen & Zurücksetzen
 
 ```bash
-./stop.sh    # Beendet Container
-./reset.sh   # Setzt Setup inkl. Volumes zurück (mit Warnung!)
+./stop.sh    # Stoppt alle Container (Daten bleiben erhalten)
+./reset.sh   # Löscht Container, Volumes und Dashboards vollständig (mit Warnung)
 ```
+
+## ⚙️ Konfigurierbare Resilienzstrategien
+
+- Retry kann via Profil aktiviert werden:
+  ```bash
+  SPRING_PROFILES_ACTIVE=retry ./gradlew bootRun
+  ```
+- Oder im Docker Compose via `.env`:
+  ```env
+  SPRING_PROFILES_ACTIVE=retry
+  ```
 
 ## 📈 Dashboards
 
 - Werden automatisch aus `grafana/dashboards` geladen
-- UID-basiert mit fester Datenquelle (`uid: prometheus`)
-- Änderungen am Dashboard bitte regelmäßig exportieren!
+- UID-basiert mit fixer Datenquelle (`uid: prometheus`)
+- Änderungen an Dashboards sollten regelmäßig exportiert werden

@@ -1,6 +1,7 @@
 server:
   port: 8080
   address: 0.0.0.0
+
 management:
   endpoints:
     web:
@@ -13,3 +14,9 @@ management:
     export:
       prometheus:
         enabled: true
+
+backend:
+  a:
+    url: http://backend-a:8080/data
+  b:
+    url: http://backend-b:8080/data
