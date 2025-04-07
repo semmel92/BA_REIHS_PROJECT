@@ -1,6 +1,34 @@
 #!/bin/bash
 
 echo ""
+ENV_FILE=".env"
+
+if [ -f "$ENV_FILE" ]; then
+    source "$ENV_FILE"
+fi
+
+if [ -z "$SPRING_PROFILES_ACTIVE" ]; then
+    echo ""
+    echo "❓ Welche Resilienzstrategie möchtest du aktivieren?"
+    echo "   [1] Keine (Standard)"
+    echo "   [2] Retry aktivieren"
+    read -p "➡️ Auswahl [1/2]: " choice
+
+    case "$choice" in
+        2)
+            SPRING_PROFILES_ACTIVE=retry
+            ;;
+        *)
+            SPRING_PROFILES_ACTIVE=""
+            ;;
+    esac
+
+    # In .env schreiben (neu erstellen oder überschreiben)
+    echo "SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE" > "$ENV_FILE"
+    echo "💾 Profil wurde in $ENV_FILE gespeichert."
+else
+    echo "✅ Profil aus .env verwendet: SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE"
+fi
 echo "🔍 Überprüfe Voraussetzungen..."
 
 # Prüfe ob docker installiert ist

@@ -41,6 +41,8 @@ services:
       - "8080:8080"
     networks:
       - monitoring
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
 
   backend-a:
     build: ../backend-a
