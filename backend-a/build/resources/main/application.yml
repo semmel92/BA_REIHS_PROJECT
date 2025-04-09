@@ -1,0 +1,5 @@
+server:
+  port: 8080
+
+info:
+  instance: ${INSTANCE_NAME:backend-a-default}

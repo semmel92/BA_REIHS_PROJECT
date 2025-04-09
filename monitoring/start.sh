@@ -12,18 +12,25 @@ if [ -z "$SPRING_PROFILES_ACTIVE" ]; then
     echo "❓ Welche Resilienzstrategie möchtest du aktivieren?"
     echo "   [1] Keine (Standard)"
     echo "   [2] Retry aktivieren"
-    read -p "➡️ Auswahl [1/2]: " choice
+    echo "   [3] Circuit Breaker aktivieren"
+    echo "   [4] Load Balancer aktivieren"
+    read -p "➡️ Auswahl [1-3]: " choice
 
     case "$choice" in
         2)
             SPRING_PROFILES_ACTIVE=retry
             ;;
+        3)
+            SPRING_PROFILES_ACTIVE=circuitbreaker
+            ;;
+        4)
+            SPRING_PROFILES_ACTIVE=loadbalancer
+            ;;
         *)
-            SPRING_PROFILES_ACTIVE=""
+            SPRING_PROFILES_ACTIVE="default"
             ;;
     esac
 
-    # In .env schreiben (neu erstellen oder überschreiben)
     echo "SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE" > "$ENV_FILE"
     echo "💾 Profil wurde in $ENV_FILE gespeichert."
 else
@@ -50,7 +57,7 @@ echo "✅ Voraussetzungen erfüllt."
 # Docker Umgebung beenden, falls noch alte Container laufen
 echo ""
 echo "🧹 Beende evtl. laufende Container..."
-docker-compose down
+docker-compose down --remove-orphans
 
 # Spring Boot Projekte bauen
 echo ""

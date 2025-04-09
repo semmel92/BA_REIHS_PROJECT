@@ -43,14 +43,22 @@ services:
       - monitoring
     environment:
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
-
-  backend-a:
+  backend-a-1:
     build: ../backend-a
-    container_name: backend-a
+    container_name: backend-a-1
     ports:
-    - "8081:8080"
+      - "8081:8080"  
+    environment:
+      - INSTANCE_NAME=backend-a-1
     networks:
-    - monitoring
+      - monitoring
+  backend-a-2:
+    build: ../backend-a
+    container_name: backend-a-2
+    environment:
+      - INSTANCE_NAME=backend-a-2
+    networks:
+      - monitoring
   backend-b:
     build: ../backend-b
     container_name: backend-b

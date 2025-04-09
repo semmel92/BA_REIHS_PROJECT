@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@Profile("!retry") // Nur aktiv, wenn Profil NICHT "retry" ist
+@Profile("default")
 public class BackendCallerService implements BackendCaller {
 
     private final RestTemplate restTemplate;

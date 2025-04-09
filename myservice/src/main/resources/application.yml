@@ -18,5 +18,20 @@ management:
 backend:
   a:
     url: http://backend-a:8080/data
+    serviceName: backend-a
   b:
     url: http://backend-b:8080/data
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      backendA:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+      backendB:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
