@@ -27,7 +27,7 @@ if [ -z "$SPRING_PROFILES_ACTIVE" ]; then
             SPRING_PROFILES_ACTIVE=loadbalancer
             ;;
         *)
-            SPRING_PROFILES_ACTIVE="default"
+            SPRING_PROFILES_ACTIVE=default
             ;;
     esac
 
@@ -62,7 +62,7 @@ docker-compose down --remove-orphans
 # Spring Boot Projekte bauen
 echo ""
 echo "🛠️ Baue Spring Boot Projekte über Root-Wrapper..."
-(cd .. && ./gradlew clean :myservice:bootJar :backend-a:bootJar :backend-b:bootJar)
+(cd .. && ./gradlew clean :myservice:bootJar :backend-a:bootJar :backend-b:bootJar :eureka-server:bootJar)
 
 
 # Compose starten
@@ -80,6 +80,7 @@ METRICS_URL="http://localhost:8080/actuator/prometheus"
 NODE_EXPORTER_URL="http://localhost:9100/metrics"
 BACKEND_A_URL="http://localhost:8081/data"
 BACKEND_B_URL="http://localhost:8082/data"
+EUREKA_URL="http://localhost:8761" 
 
 echo ""
 echo "✅ Umgebung ist aktiv. Die wichtigsten Endpunkte:"
@@ -91,11 +92,11 @@ echo "📈 Metriken:       $METRICS_URL"
 echo "🧠 Node Exporter:  $NODE_EXPORTER_URL"
 echo "📦 Backend A:      $BACKEND_A_URL"
 echo "📦 Backend B:      $BACKEND_B_URL"
+echo "🧭 Eureka Server:  $EUREKA_URL"
 echo ""
 echo "----------------------------------------------"
 
 
-# Browser-Tabs öffnen (nur unter Windows/WSL)
 echo "🌐 Öffne $PROM_URL im Windows-Browser..."
 powershell.exe start "$PROM_URL"
 echo "🌐 Öffne $GRAFANA_URL im Windows-Browser..."
@@ -106,3 +107,5 @@ echo "🌐 Öffne $BACKEND_A_URL im Windows-Browser..."
 powershell.exe start "$BACKEND_A_URL"
 echo "🌐 Öffne $BACKEND_B_URL im Windows-Browser..."
 powershell.exe start "$BACKEND_B_URL"
+echo "🌐 Öffne $EUREKA_URL im Windows-Browser..."
+powershell.exe start "$EUREKA_URL"

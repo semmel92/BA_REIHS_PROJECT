@@ -1,6 +1,5 @@
 package com.example.myservice;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,11 +10,7 @@ public class LoadBalancedBackendCallerService implements BackendCaller {
 
     private final RestTemplate restTemplate;
 
-    @Value("${backend.a.url}")
-    private String backendAUrl;
 
-    @Value("${backend.b.url}")
-    private String backendBUrl;
 
     public LoadBalancedBackendCallerService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -23,11 +18,12 @@ public class LoadBalancedBackendCallerService implements BackendCaller {
 
     @Override
     public String callBackendA() {
+        System.out.println("➡️ LoadBalancer ruft auf: http://backend-a/data");
         return restTemplate.getForObject("http://backend-a/data", String.class);
     }
-
+    
     @Override
     public String callBackendB() {
-        return restTemplate.getForObject(backendBUrl, String.class);
+        return restTemplate.getForObject("http://backend-b/data", String.class);
     }
 }

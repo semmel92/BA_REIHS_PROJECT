@@ -1,2 +1,2 @@
 rootProject.name = 'Bachelorarbeit'
-include 'myservice', 'backend-a', 'backend-b'
+include 'myservice', 'backend-a', 'backend-b', 'eureka-server'

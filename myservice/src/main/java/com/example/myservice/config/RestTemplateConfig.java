@@ -10,11 +10,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 public class RestTemplateConfig {
 
     @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
-    @Bean
     @LoadBalanced
     @Profile("loadbalancer")
     public RestTemplate loadBalancedRestTemplate() {
@@ -22,9 +17,8 @@ public class RestTemplateConfig {
     }
 
     @Bean
-    @Profile("!loadbalancer")
+    @Profile({"default", "retry", "circuitbreaker"})
     public RestTemplate defaultRestTemplate() {
         return new RestTemplate();
     }
-
 }

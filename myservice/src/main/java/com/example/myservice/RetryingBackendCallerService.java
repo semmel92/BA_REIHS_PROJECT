@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@Profile("retry") // Nur aktiv bei gesetztem Profil "retry"
+@Profile("retry") 
 public class RetryingBackendCallerService implements BackendCaller {
 
     private final RestTemplate restTemplate;

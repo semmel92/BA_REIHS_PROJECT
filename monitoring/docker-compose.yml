@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   prometheus:
     image: prom/prometheus:latest
@@ -33,6 +35,16 @@ services:
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
     networks:
       - monitoring
+
+  eureka-server:
+    image: eurekaserver:latest
+    build: ../eureka-server
+    container_name: eureka-server
+    ports:
+      - "8761:8761"
+    networks:
+      - monitoring
+
   myservice:
     build: ../myservice
     container_name: myservice
@@ -43,29 +55,51 @@ services:
       - monitoring
     environment:
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+
   backend-a-1:
     build: ../backend-a
     container_name: backend-a-1
     ports:
-      - "8081:8080"  
+      - "8081:8080"
     environment:
       - INSTANCE_NAME=backend-a-1
+      - SPRING_PROFILES_ACTIVE=loadbalancer
     networks:
       - monitoring
+
   backend-a-2:
     build: ../backend-a
     container_name: backend-a-2
+    ports:
+      - "8083:8080"
     environment:
       - INSTANCE_NAME=backend-a-2
+      - SPRING_PROFILES_ACTIVE=loadbalancer
     networks:
       - monitoring
-  backend-b:
+
+  backend-b-1:
     build: ../backend-b
-    container_name: backend-b
+    container_name: backend-b-1
     ports:
-    - "8082:8080"
+      - "8082:8080"
+    environment:
+      - INSTANCE_NAME=backend-b-1
+      - SPRING_PROFILES_ACTIVE=loadbalancer
     networks:
-    - monitoring
+      - monitoring
+
+  backend-b-2:
+    build: ../backend-b
+    container_name: backend-b-2
+    ports:
+      - "8084:8080"
+    environment:
+      - INSTANCE_NAME=backend-b-2
+      - SPRING_PROFILES_ACTIVE=loadbalancer
+    networks:
+      - monitoring
+
 volumes:
   prometheus-data:
   grafana-data:
@@ -73,4 +107,3 @@ volumes:
 networks:
   monitoring:
     driver: bridge
-

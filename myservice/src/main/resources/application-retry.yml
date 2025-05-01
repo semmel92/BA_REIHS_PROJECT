@@ -1,0 +1,28 @@
+spring:
+  profiles: retry
+
+server:
+  port: 8080
+  address: 0.0.0.0
+
+resilience4j.retry:
+  instances:
+    backendA:
+      maxAttempts: 3
+      waitDuration: 1s
+    backendB:
+      maxAttempts: 3
+      waitDuration: 1s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
