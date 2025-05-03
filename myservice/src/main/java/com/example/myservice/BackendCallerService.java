@@ -17,6 +17,9 @@ public class BackendCallerService implements BackendCaller {
     @Value("${backend.b.url}")
     private String backendBUrl;
 
+    @Value("${backend.a.unstableUrl}")
+    private String unstableUrl;
+    
     public BackendCallerService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -28,4 +31,8 @@ public class BackendCallerService implements BackendCaller {
     public String callBackendB() {
         return restTemplate.getForObject(backendBUrl, String.class);
     }
+
+    public String callUnstable() {
+    return restTemplate.getForObject(unstableUrl, String.class);
+}
 }

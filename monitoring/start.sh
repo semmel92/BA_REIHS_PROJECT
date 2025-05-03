@@ -56,8 +56,9 @@ echo "✅ Voraussetzungen erfüllt."
 
 # Docker Umgebung beenden, falls noch alte Container laufen
 echo ""
-echo "🧹 Beende evtl. laufende Container..."
-docker-compose down --remove-orphans
+echo "🧹 Beende ALLE laufenden Container (systemweit)..."
+docker stop $(docker ps -q) 2>/dev/null || true
+docker rm $(docker ps -aq) 2>/dev/null || true
 
 # Spring Boot Projekte bauen
 echo ""
@@ -68,7 +69,7 @@ echo "🛠️ Baue Spring Boot Projekte über Root-Wrapper..."
 # Compose starten
 echo ""
 echo "🔄 Starte Docker-Umgebung neu..."
-docker-compose up --build -d
+docker compose --profile "$SPRING_PROFILES_ACTIVE" up --build -d
 
 sleep 5
 
@@ -80,15 +81,17 @@ METRICS_URL="http://localhost:8080/actuator/prometheus"
 NODE_EXPORTER_URL="http://localhost:9100/metrics"
 BACKEND_A_URL="http://localhost:8081/data"
 BACKEND_B_URL="http://localhost:8082/data"
-EUREKA_URL="http://localhost:8761" 
+EUREKA_URL="http://localhost:8761"
+CADVISOR_URL="http://localhost:8089/metrics" 
 
 echo ""
 echo "✅ Umgebung ist aktiv. Die wichtigsten Endpunkte:"
 echo "----------------------------------------------"
 echo "🔍 Prometheus:     $PROM_URL"
 echo "📊 Grafana:        $GRAFANA_URL"
-echo "⚙️  MyService:      $MY_SERVICE_URL"
+echo "⚙️ MyService:      $MY_SERVICE_URL"
 echo "📈 Metriken:       $METRICS_URL"
+echo "📈 Cadvisor:       $CADVISOR_URL"
 echo "🧠 Node Exporter:  $NODE_EXPORTER_URL"
 echo "📦 Backend A:      $BACKEND_A_URL"
 echo "📦 Backend B:      $BACKEND_B_URL"
@@ -101,11 +104,4 @@ echo "🌐 Öffne $PROM_URL im Windows-Browser..."
 powershell.exe start "$PROM_URL"
 echo "🌐 Öffne $GRAFANA_URL im Windows-Browser..."
 powershell.exe start "$GRAFANA_URL"
-echo "🌐 Öffne $MY_SERVICE_URL im Windows-Browser..."
-powershell.exe start "$MY_SERVICE_URL"
-echo "🌐 Öffne $BACKEND_A_URL im Windows-Browser..."
-powershell.exe start "$BACKEND_A_URL"
-echo "🌐 Öffne $BACKEND_B_URL im Windows-Browser..."
-powershell.exe start "$BACKEND_B_URL"
-echo "🌐 Öffne $EUREKA_URL im Windows-Browser..."
-powershell.exe start "$EUREKA_URL"
+

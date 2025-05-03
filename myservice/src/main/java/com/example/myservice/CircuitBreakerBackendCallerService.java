@@ -18,6 +18,9 @@ public class CircuitBreakerBackendCallerService implements BackendCaller {
     @Value("${backend.b.url}")
     private String backendBUrl;
 
+    @Value("${backend.a.unstableUrl}")
+    private String unstableUrl;
+
     public CircuitBreakerBackendCallerService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -33,6 +36,17 @@ public class CircuitBreakerBackendCallerService implements BackendCaller {
     public String callBackendB() {
         return restTemplate.getForObject(backendBUrl, String.class);
     }
+    
+    @Override
+    @CircuitBreaker(name = "backendA", fallbackMethod = "fallbackUnstable")
+    public String callUnstable() {
+        System.out.println(">>> CircuitBreakerBackendCallerService callUnstable() aufgerufen");
+        return restTemplate.getForObject(unstableUrl, String.class);
+    }
+    
+public String fallback(Throwable t) {
+    return "⚠️ Fallback aktiv: " + t.getMessage();
+}   
 
     public String fallbackA(Throwable t) {
         return "Circuit Breaker aktiv: Backend A ist nicht erreichbar.";
@@ -40,5 +54,9 @@ public class CircuitBreakerBackendCallerService implements BackendCaller {
 
     public String fallbackB(Throwable t) {
         return "Circuit Breaker aktiv: Backend B ist nicht erreichbar.";
+    }
+
+    public String fallbackUnstable(Throwable t) {
+        return "Circuit Breaker aktiv: /unstable-Endpunkt nicht erreichbar.";
     }
 }

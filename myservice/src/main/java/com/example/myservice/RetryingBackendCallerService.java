@@ -34,6 +34,11 @@ public class RetryingBackendCallerService implements BackendCaller {
         return restTemplate.getForObject(backendBUrl, String.class);
     }
 
+    @Override
+    public String callUnstable() {
+        return "RetryingBackendCallerService: /unstable wird in diesem Profil nicht verwendet.";
+    }
+    
     @Recover
     public String recoverBackend(Exception e) {
         return "❌ Backend konnte nicht erreicht werden: " + e.getMessage();

@@ -1,5 +1,7 @@
 spring:
-  profiles: retry
+  config:
+    activate:
+      on-profile: retry
 
 server:
   port: 8080

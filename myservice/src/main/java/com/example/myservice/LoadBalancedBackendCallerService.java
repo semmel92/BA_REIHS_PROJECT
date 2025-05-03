@@ -26,4 +26,9 @@ public class LoadBalancedBackendCallerService implements BackendCaller {
     public String callBackendB() {
         return restTemplate.getForObject("http://backend-b/data", String.class);
     }
+    
+    @Override
+    public String callUnstable() {
+        return "RetryingBackendCallerService: /unstable wird in diesem Profil nicht verwendet.";
+    }
 }
