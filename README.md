@@ -99,3 +99,64 @@ Das Skript:
 - Werden automatisch aus `grafana/dashboards` geladen
 - UID-basiert mit fixer Datenquelle (`uid: prometheus`)
 - Änderungen an Dashboards sollten regelmäßig exportiert werden
+
+## Settings fürs Jupyter Book
+
+- Aktivieren der Umgebung
+source jmeter/.venv/bin/activate
+
+## Testablauf Serverzeitig 
+
+L1 - circuitbreaker_test.jmx
+        <stringProp name="ThreadGroup.num_threads">20</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
+        <stringProp name="LoopController.loops">50</stringProp>
+
+BackendAController.java
+
+    @GetMapping("/unstable")
+    public String unstable() {
+        double randomValue = Math.random();
+        System.out.println("Zufallswert: " + randomValue);
+        if (randomValue < 0.0) {
+            throw new RuntimeException("Simulierter Fehler");
+        }
+        return "Stabil genug";
+    }
+
+L2 - circuitbreaker_test.jmx
+        <stringProp name="ThreadGroup.num_threads">100</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <stringProp name="LoopController.loops">100</stringProp>
+
+BackendAController.java
+
+    @GetMapping("/unstable")
+    public String unstable() {
+        double randomValue = Math.random();
+        System.out.println("Zufallswert: " + randomValue);
+        if (randomValue < 0.5) {
+            throw new RuntimeException("Simulierter Fehler");
+        }
+        return "Stabil genug";
+    }
+
+L3 - circuitbreaker_test.jmx
+        <stringProp name="ThreadGroup.num_threads">500</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <stringProp name="LoopController.loops">150</stringProp>
+
+BackendAController.java
+
+    @GetMapping("/unstable")
+    public String unstable() {
+        double randomValue = Math.random();
+        System.out.println("Zufallswert: " + randomValue);
+        if (randomValue < 1) {
+            throw new RuntimeException("Simulierter Fehler");
+        }
+        return "Stabil genug";
+    }
+
+
+

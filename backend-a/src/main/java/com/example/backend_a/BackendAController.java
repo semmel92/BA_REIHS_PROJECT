@@ -19,7 +19,7 @@ public class BackendAController {
     public String unstable() {
         double randomValue = Math.random();
         System.out.println("Zufallswert: " + randomValue);
-        if (randomValue < 0.0) {
+        if (randomValue < 0.1) {
             throw new RuntimeException("Simulierter Fehler");
         }
         return "Stabil genug";
