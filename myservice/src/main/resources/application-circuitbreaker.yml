@@ -27,26 +27,29 @@ resilience4j:
         permittedNumberOfCallsInHalfOpenState: 5
         slidingWindowType: COUNT_BASED
 
+eureka:
+  client:
+    enabled: false
 
 management:
   endpoints:
     web:  
       exposure:
-        include: health,prometheus
+        include: '*'
   endpoint:
     prometheus:
       enabled: true
-  metrics:
-    export:
-      prometheus:
+  prometheus:
+    metrics:
+      export:
         enabled: true
 
 backend:
   a:
-    url: http://localhost:8081/data
+    url: http://backend-a-1:8080/data
     unstableUrl: http://backend-a-1:8080/unstable
   b:
-    url: http://localhost:8082/data
+    url: http://backend-b-1:8080/data
 
 logging:
   level:

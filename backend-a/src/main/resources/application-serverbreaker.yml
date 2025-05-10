@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: serverbreaker
+
+server:
+  port: 8080
+  address: 0.0.0.0
+
+info:
+  instance: backend-a-serverbreaker
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    prometheus:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true

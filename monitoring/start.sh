@@ -7,35 +7,48 @@ if [ -f "$ENV_FILE" ]; then
     source "$ENV_FILE"
 fi
 
-if [ -z "$SPRING_PROFILES_ACTIVE" ]; then
+if [ -z "$SPRING_PROFILES_ACTIVE" ] || [ -z "$SPRING_PROFILES_ACTIVE_BACKEND_A" ]; then
     echo ""
     echo "❓ Welche Resilienzstrategie möchtest du aktivieren?"
     echo "   [1] Keine (Standard)"
     echo "   [2] Retry aktivieren"
-    echo "   [3] Circuit Breaker aktivieren"
-    echo "   [4] Load Balancer aktivieren"
-    read -p "➡️ Auswahl [1-3]: " choice
+    echo "   [3] Circuit Breaker (Clientseitig)"
+    echo "   [4] Circuit Breaker (Serverseitig)"
+    echo "   [5] Load Balancer aktivieren"
+    read -p "➡️ Auswahl [1-5]: " choice
 
     case "$choice" in
         2)
             SPRING_PROFILES_ACTIVE=retry
+            SPRING_PROFILES_ACTIVE_BACKEND_A=serverdefault
             ;;
         3)
             SPRING_PROFILES_ACTIVE=circuitbreaker
+            SPRING_PROFILES_ACTIVE_BACKEND_A=serverdefault
             ;;
         4)
+            SPRING_PROFILES_ACTIVE=default
+            SPRING_PROFILES_ACTIVE_BACKEND_A=serverbreaker
+            ;;
+        5)
             SPRING_PROFILES_ACTIVE=loadbalancer
+            SPRING_PROFILES_ACTIVE_BACKEND_A=loadbalancer
             ;;
         *)
             SPRING_PROFILES_ACTIVE=default
+            SPRING_PROFILES_ACTIVE_BACKEND_A=serverdefault
             ;;
     esac
 
     echo "SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE" > "$ENV_FILE"
-    echo "💾 Profil wurde in $ENV_FILE gespeichert."
+    echo "SPRING_PROFILES_ACTIVE_BACKEND_A=$SPRING_PROFILES_ACTIVE_BACKEND_A" >> "$ENV_FILE"
+    echo "💾 Profile wurden in $ENV_FILE gespeichert."
 else
-    echo "✅ Profil aus .env verwendet: SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE"
+    echo "✅ Profile aus .env verwendet:"
+    echo "   Client (myservice):      SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE"
+    echo "   Server (backend-a):      SPRING_PROFILES_ACTIVE_BACKEND_A=$SPRING_PROFILES_ACTIVE_BACKEND_A"
 fi
+
 echo "🔍 Überprüfe Voraussetzungen..."
 
 # Prüfe ob docker installiert ist

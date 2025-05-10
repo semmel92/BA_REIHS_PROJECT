@@ -17,7 +17,7 @@ public class RestTemplateConfig {
     }
 
     @Bean
-    @Profile({"default", "retry", "circuitbreaker"})
+    @Profile({"default", "retry", "circuitbreaker", "serverbreaker", "serverdefault"})
     public RestTemplate defaultRestTemplate() {
         return new RestTemplate();
     }

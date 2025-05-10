@@ -105,9 +105,9 @@ Das Skript:
 - Aktivieren der Umgebung
 source jmeter/.venv/bin/activate
 
-## Testablauf Serverzeitig 
+## Testablauf Client und Serverzeitig 
 
-L1 - circuitbreaker_test.jmx
+L1 - circuitbreaker_test.jmx || serverbreaker_test.jmx
         <stringProp name="ThreadGroup.num_threads">20</stringProp>
         <stringProp name="ThreadGroup.ramp_time">10</stringProp>
         <stringProp name="LoopController.loops">50</stringProp>
@@ -135,7 +135,7 @@ BackendAController.java
     public String unstable() {
         double randomValue = Math.random();
         System.out.println("Zufallswert: " + randomValue);
-        if (randomValue < 0.5) {
+        if (randomValue < 0.3) {
             throw new RuntimeException("Simulierter Fehler");
         }
         return "Stabil genug";

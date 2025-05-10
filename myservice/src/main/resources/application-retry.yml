@@ -20,7 +20,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,prometheus
+        include: '*'
   endpoint:
     prometheus:
       enabled: true
@@ -28,3 +28,10 @@ management:
     export:
       prometheus:
         enabled: true
+
+backend:
+  a:
+    url: http://backend-a-1:8080/data
+    unstableUrl: http://backend-a-1:8080/unstable
+  b:
+    url: http://backend-b-1:8080/data

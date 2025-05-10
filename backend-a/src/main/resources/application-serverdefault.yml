@@ -1,0 +1,25 @@
+spring:
+  config:
+    activate:
+      on-profile: serverdefault
+
+server:
+  port: 8080
+  address: 0.0.0.0
+
+info:
+  instance: backend-a-serverdefault
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    prometheus:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true

@@ -27,8 +27,7 @@ public class CircuitBreakerBackendCallerService implements BackendCaller {
 
     @Override
     @CircuitBreaker(name = "backendA", fallbackMethod = "fallbackA")
-    public String callBackendA() {
-        return restTemplate.getForObject(backendAUrl, String.class);
+    public String callBackendA() { return restTemplate.getForObject(backendAUrl, String.class);
     }
 
     @Override
@@ -39,9 +38,7 @@ public class CircuitBreakerBackendCallerService implements BackendCaller {
     
     @Override
     @CircuitBreaker(name = "backendA", fallbackMethod = "fallbackUnstable")
-    public String callUnstable() {
-        System.out.println(">>> CircuitBreakerBackendCallerService callUnstable() aufgerufen");
-        return restTemplate.getForObject(unstableUrl, String.class);
+    public String callUnstable() {        return restTemplate.getForObject(unstableUrl, String.class);
     }
     
 public String fallback(Throwable t) {
