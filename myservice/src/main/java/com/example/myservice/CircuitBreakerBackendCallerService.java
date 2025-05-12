@@ -5,11 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @Profile("circuitbreaker")
 public class CircuitBreakerBackendCallerService implements BackendCaller {
 
+    private static final Logger log = LoggerFactory.getLogger(CircuitBreakerBackendCallerService.class);
     private final RestTemplate restTemplate;
 
     @Value("${backend.a.url}")
@@ -41,9 +44,9 @@ public class CircuitBreakerBackendCallerService implements BackendCaller {
     public String callUnstable() {        return restTemplate.getForObject(unstableUrl, String.class);
     }
     
-public String fallback(Throwable t) {
+    public String fallback(Throwable t) {
     return "⚠️ Fallback aktiv: " + t.getMessage();
-}   
+}
 
     public String fallbackA(Throwable t) {
         return "Circuit Breaker aktiv: Backend A ist nicht erreichbar.";
@@ -54,6 +57,7 @@ public String fallback(Throwable t) {
     }
 
     public String fallbackUnstable(Throwable t) {
-        return "Circuit Breaker aktiv: /unstable-Endpunkt nicht erreichbar.";
+        log.warn("⚠️ Circuit Breaker aktiv: Weiterleitung an Backend B.");
+        return restTemplate.getForObject(backendBUrl, String.class);
     }
 }
