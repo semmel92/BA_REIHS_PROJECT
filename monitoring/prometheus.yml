@@ -14,5 +14,8 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['myservice:8080']
-
+      
+  - job_name: 'docker-stats'
+    static_configs:
+      - targets: ['docker-stats-exporter:9487']
 
