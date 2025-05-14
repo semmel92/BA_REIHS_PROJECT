@@ -126,7 +126,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (name) (max_over_time(dockerstats_memory_usage_rss_bytes[5m]) / 1024 / 1024)\r\n",
+          "expr": "sum by (name) (max_over_time(dockerstats_memory_usage_rss_bytes{name=~\"myservice|backend-a-1|backend-b-1\"}[5m]) / 1024 / 1024)\r\n",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -218,7 +218,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (name) (increase(dockerstats_network_transmitted_bytes[1m]))\r\n",
+          "expr": "sum by (name) (increase(dockerstats_network_transmitted_bytes{name=~\"myservice|backend-a-1|backend-b-1\"}[1m]))\r\n",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -310,7 +310,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (name) (rate(dockerstats_network_received_bytes[1m]))\r\n",
+          "expr": "sum by (name) (rate(dockerstats_network_received_bytes{name=~\"myservice|backend-a-1|backend-b-1\"}[1m]))\r\n",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -403,7 +403,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum by (name) (avg_over_time(dockerstats_memory_usage_rss_bytes[5m])) / 1024 / 1024\r\n\r\n",
+          "expr": "sum by (name) (avg_over_time(dockerstats_memory_usage_rss_bytes{name=~\"myservice|backend-a-1|backend-b-1\"}[5m])) / 1024 / 1024\r\n\r\n",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
@@ -467,7 +467,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -499,7 +500,7 @@
             "uid": "prometheus"
           },
           "editorMode": "code",
-          "expr": "sum(sum_over_time(dockerstats_cpu_usage_ratio[5m])) by (name)\r\n",
+          "expr": "sum by (name) (avg_over_time(dockerstats_cpu_usage_ratio{ name=~\"myservice|backend-a-1|backend-b-1\" }[5m]))\r\n",
           "instant": false,
           "legendFormat": "__auto",
           "range": true,
@@ -525,5 +526,5 @@
   "timezone": "browser",
   "title": "MyService Overview",
   "uid": "myservice-overview",
-  "version": 3
+  "version": 7
 }
