@@ -7,14 +7,28 @@ server:
   port: 8080
   address: 0.0.0.0
 
-resilience4j.retry:
-  instances:
-    backendA:
-      maxAttempts: 3
-      waitDuration: 1s
-    backendB:
-      maxAttempts: 3
-      waitDuration: 1s
+resilience4j:
+  retry:
+    instances:
+      backendA:
+        max-attempts: 3
+        wait-duration: 1s
+        exponential-backoff-multiplier: 2.0
+        randomized-wait: true
+        retry-exceptions:
+          - org.springframework.web.client.ResourceAccessException
+          - java.io.IOException
+        fail-after-max-attempts: true
+
+      backendB:
+        max-attempts: 3
+        wait-duration: 1s
+        exponential-backoff-multiplier: 2.0
+        randomized-wait: true
+        retry-exceptions:
+          - org.springframework.web.client.ResourceAccessException
+          - java.io.IOException
+        fail-after-max-attempts: true
 
 management:
   endpoints:

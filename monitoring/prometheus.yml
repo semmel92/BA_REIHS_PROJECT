@@ -14,8 +14,20 @@ scrape_configs:
     metrics_path: '/actuator/prometheus'
     static_configs:
       - targets: ['myservice:8080']
-      
+
+  - job_name: 'backend-a'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['backend-a-1:8080']
+
+  - job_name: 'backend-b'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['backend-b-1:8080']
+
   - job_name: 'docker-stats'
     static_configs:
       - targets: ['docker-stats-exporter:9487']
 
+remote_write:
+  - url: "http://influxdb:8086/api/v1/prom/write?db=test_results"

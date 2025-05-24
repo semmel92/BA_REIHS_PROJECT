@@ -55,6 +55,7 @@ services:
       - monitoring
     environment:
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - TEST_ID=${TEST_ID}
 
   backend-a-1:
     build: ../backend-a
@@ -64,6 +65,7 @@ services:
     environment:
       - INSTANCE_NAME=backend-a-1
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE_BACKEND_A}
+      - TEST_ID=${TEST_ID}
     networks:
       - monitoring
 
@@ -76,6 +78,7 @@ services:
     environment:
       - INSTANCE_NAME=backend-b-1
       - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE_BACKEND_A}
+      - TEST_ID=${TEST_ID}
     networks:
       - monitoring
 
@@ -90,7 +93,18 @@ services:
     profiles:
       - loadbalancer 
 
-
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=test_results
+      - INFLUXDB_HTTP_AUTH_ENABLED=false
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    networks:
+      - monitoring
 
   backend-a-2:
     build: ../backend-a
@@ -121,6 +135,7 @@ services:
 volumes:
   prometheus-data:
   grafana-data:
+  influxdb-data:
 
 networks:
   monitoring:

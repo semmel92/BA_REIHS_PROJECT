@@ -17,3 +17,20 @@ eureka:
       defaultZone: http://eureka-server:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true

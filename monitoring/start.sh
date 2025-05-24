@@ -3,10 +3,24 @@
 echo ""
 ENV_FILE=".env"
 
+# 🆔 TEST_ID vom Argument oder automatisch erzeugen
+if [ -n "$1" ]; then
+    TEST_ID="$1"
+    echo "🧪 Verwende TEST_ID vom Aufrufer: $TEST_ID"
+else
+    # Platzhalter für Profil, wird ggf. später gesetzt
+    TEMP_PROFILE=$(date +%H%M)  # falls noch leer
+    TEST_ID="test_$(date +%Y_%m_%d_%H%M)_${SPRING_PROFILES_ACTIVE:-$TEMP_PROFILE}"
+    echo "🧪 Generierte neue TEST_ID: $TEST_ID"
+fi
+export TEST_ID
+
+# .env laden, falls vorhanden
 if [ -f "$ENV_FILE" ]; then
     source "$ENV_FILE"
 fi
 
+# Falls Profile nicht gesetzt, Auswahl anzeigen
 if [ -z "$SPRING_PROFILES_ACTIVE" ] || [ -z "$SPRING_PROFILES_ACTIVE_BACKEND_A" ]; then
     echo ""
     echo "❓ Welche Resilienzstrategie möchtest du aktivieren?"
@@ -42,11 +56,13 @@ if [ -z "$SPRING_PROFILES_ACTIVE" ] || [ -z "$SPRING_PROFILES_ACTIVE_BACKEND_A" 
 
     echo "SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE" > "$ENV_FILE"
     echo "SPRING_PROFILES_ACTIVE_BACKEND_A=$SPRING_PROFILES_ACTIVE_BACKEND_A" >> "$ENV_FILE"
-    echo "💾 Profile wurden in $ENV_FILE gespeichert."
+    echo "TEST_ID=$TEST_ID" >> "$ENV_FILE"
+    echo "💾 Profile + TEST_ID wurden in $ENV_FILE gespeichert."
 else
     echo "✅ Profile aus .env verwendet:"
     echo "   Client (myservice):      SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE"
     echo "   Server (backend-a):      SPRING_PROFILES_ACTIVE_BACKEND_A=$SPRING_PROFILES_ACTIVE_BACKEND_A"
+    echo "   Testlauf-ID:             TEST_ID=$TEST_ID"
 fi
 
 echo "🔍 Überprüfe Voraussetzungen..."
@@ -78,11 +94,10 @@ echo ""
 echo "🛠️ Baue Spring Boot Projekte über Root-Wrapper..."
 (cd .. && ./gradlew clean :myservice:bootJar :backend-a:bootJar :backend-b:bootJar :eureka-server:bootJar)
 
-
 # Compose starten
 echo ""
 echo "🔄 Starte Docker-Umgebung neu..."
-docker compose --profile "$SPRING_PROFILES_ACTIVE" up --build -d
+docker-compose --profile "$SPRING_PROFILES_ACTIVE" up --build -d
 
 sleep 5
 
@@ -112,9 +127,7 @@ echo "🧭 Eureka Server:  $EUREKA_URL"
 echo ""
 echo "----------------------------------------------"
 
-
 echo "🌐 Öffne $PROM_URL im Windows-Browser..."
 powershell.exe start "$PROM_URL"
 echo "🌐 Öffne $GRAFANA_URL im Windows-Browser..."
 powershell.exe start "$GRAFANA_URL"
-

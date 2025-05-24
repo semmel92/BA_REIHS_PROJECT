@@ -1,51 +1,92 @@
 #!/bin/bash
 
 echo ""
-echo "🚀 Starte DEFAULT-Baseline-Test (backend-a + backend-b) mit JMeter + Ressourcenmonitoring"
+echo "🚀 Starte DEFAULT-Baseline-Test (backend-a + backend-b) mit JMeter"
 
-# 1. Zeiterfassung
-start_time=$(date +%s)
+#######################################################
+# 🔧 Testkonfiguration: Zentrale Steuerparameter
+#######################################################
+
+NUM_THREADS=10
+LOOPS=10
+TIMER_DELAY=5
+RAMP_UP=0
+TOTAL_REQUESTS=$((NUM_THREADS * LOOPS * 2))
+
+GRAFANA_API_KEY="glsa_7ftdXcd0mmwcU8THUh4l06BLiPZJvv2q_1a2101c0"
+GRAFANA_URL="http://localhost:3000"
+DASHBOARD_UID="myservice-overview"
+
+#######################################################
+# 🧭 Zeit & Verzeichnisse
+#######################################################
+
+start_time_unix=$(date +%s)
+start_time_ms=$(($(date +%s%N)/1000000))
 timestamp_full=$(date +"%Y-%m-%d_%H-%M-%S")
+test_id="test_${timestamp_full}_default"
+export TEST_ID="$test_id"
+echo "🆔 Test-ID für diesen Lauf: $TEST_ID"
 timestamp_short=$(date +"%H-%M-%S")
-
-# 2. Ergebnisverzeichnis vorbereiten
 RESULT_DIR="results/default_${timestamp_full}"
 mkdir -p "$RESULT_DIR"
-
-# 3. Ressourcen-Monitoring starten
-STATS_FILE="${timestamp_short}_docker_stats_live.csv"
-echo "📊 Starte Ressourcenüberwachung → ${STATS_FILE} ..."
-(
-  while true; do
-    docker stats --no-stream --format "{{.Name}},{{.CPUPerc}},{{.MemUsage}},{{.NetIO}}" >> "$RESULT_DIR/$STATS_FILE"
-    sleep 0.5
-  done
-) &
-STATS_PID=$!
-echo "# --- TEST_START: $(date +%s) ---" >> "$RESULT_DIR/$STATS_FILE"
-
-# 4. JMeter-Test ausführen (angepasst für A und B)
 JMETER_RESULTS_FILE="${timestamp_short}_results.jtl"
+
+#######################################################
+# 📌 Annotation: TESTSTART
+#######################################################
+
+echo "📍 Setze Grafana-Annotation: 🟢 Teststart"
+curl -s -X POST "$GRAFANA_URL/api/annotations" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $GRAFANA_API_KEY" \
+  -d "{
+    \"dashboardUID\": \"$DASHBOARD_UID\",
+    \"time\": $start_time_ms,
+    \"text\": \"🟢 Teststart: Default-Test ($NUM_THREADS × $LOOPS)\",
+    \"tags\": [\"default\", \"test\", \"start\"]
+  }" > /dev/null
+
+#######################################################
+# 🧪 JMeter-Test ausführen
+#######################################################
+
 echo "🎯 Starte JMeter-Test (8081 + 8082) → ${JMETER_RESULTS_FILE} ..."
 docker run --rm \
   -v "$(pwd)/default_test.jmx:/test.jmx" \
   -v "$(pwd)/$RESULT_DIR:/results" \
   justb4/jmeter \
-  -n -t /test.jmx -l /results/$JMETER_RESULTS_FILE -e -o /results/report
+  -n -t /test.jmx \
+  -l /results/$JMETER_RESULTS_FILE \
+  -JNUM_THREADS=$NUM_THREADS \
+  -JLOOPS=$LOOPS \
+  -JTIMER_DELAY=$TIMER_DELAY \
+  -JRAMP_UP=$RAMP_UP \
+  -e -o /results/report
 
-# 5. Ressourcen-Monitoring beenden
-echo "🛑 Beende Ressourcenüberwachung..."
-echo "# --- TEST_END: $(date +%s) ---" >> "$RESULT_DIR/$STATS_FILE"
-kill "$STATS_PID" 2>/dev/null
+#######################################################
+# 📍 Annotation: TESTENDE
+#######################################################
 
-# 6. Dauer anzeigen
-end_time=$(date +%s)
-duration=$((end_time - start_time))
+end_time_ms=$(($(date +%s%N)/1000000))
+echo "📍 Setze Grafana-Annotation: 🔴 Testende"
+curl -s -X POST "$GRAFANA_URL/api/annotations" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $GRAFANA_API_KEY" \
+  -d "{
+    \"dashboardUID\": \"$DASHBOARD_UID\",
+    \"time\": $end_time_ms,
+    \"text\": \"🔴 Testende: Default-Test abgeschlossen\",
+    \"tags\": [\"default\", \"test\", \"ende\"]
+  }" > /dev/null
 
-# 7. Zusammenfassung
+#######################################################
+# 📦 Zusammenfassung
+#######################################################
+
+duration=$(( $(date +%s) - start_time_unix ))
 echo ""
-echo "✅ Default-Test abgeschlossen in ${duration} Sekunden."
+echo "✅ Test abgeschlossen in ${duration} Sekunden."
 echo "📁 Ergebnisse: $RESULT_DIR"
 echo "📊 HTML-Report: $RESULT_DIR/report/index.html"
-echo "📈 Ressourcenverbrauch: $RESULT_DIR/$STATS_FILE"
 echo "📄 JMeter-Daten: $RESULT_DIR/$JMETER_RESULTS_FILE"

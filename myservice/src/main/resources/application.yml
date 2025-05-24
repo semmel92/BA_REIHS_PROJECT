@@ -1,3 +1,20 @@
 spring:
   profiles:
     active: ${spring.profiles.active:${SPRING_PROFILES_ACTIVE:default}}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    enable:
+      http.client.requests: true
+    distribution:
+      percentiles-histogram:
+        http.client.reaktionszeit: true
+      percentiles:
+        http.client.reaktionszeit: 0.95

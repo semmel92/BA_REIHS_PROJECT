@@ -21,6 +21,12 @@ public class CallController {
         return backendCaller.callBackendA();
     }
 
+    @GetMapping("/call-a-unstable")
+public String callBackendAUnstable() {
+    log.info("➡️ Anfrage an Backend A (unstable)");
+    return backendCaller.callUnstable();
+}
+
     @GetMapping("/call-b")
     public String callBackendB() {
         log.info("➡️ Anfrage an Backend B");
