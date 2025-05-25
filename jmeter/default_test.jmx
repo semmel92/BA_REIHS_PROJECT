@@ -1,8 +1,8 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
   <hashTree>
-    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Default Test A+B" enabled="true">
-      <stringProp name="TestPlan.comments">Testet /data auf backend-a und backend-b</stringProp>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Default Test A+B (parametrisierbar)" enabled="true">
+      <stringProp name="TestPlan.comments">Testet /unstable und /data – Parameter über CLI (Bash-Skript) steuerbar</stringProp>
       <boolProp name="TestPlan.functional_mode">false</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments"/>
@@ -10,30 +10,39 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Load Threads" enabled="true">
-        <stringProp name="ThreadGroup.num_threads">500</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(NUM_THREADS,50)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(RAMP_UP,10)}</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
         <stringProp name="ThreadGroup.duration"/>
-        <stringProp name="ThreadGroup.delay"/>
+        <stringProp name="ThreadGroup.delay">10</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">150</stringProp>
+          <stringProp name="LoopController.loops">${__P(LOOPS,100)}</stringProp>
         </elementProp>
       </ThreadGroup>
       <hashTree>
+        <!-- Timer: Steuerung der Pause zwischen Requests -->
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Zwischenpause" enabled="true">
+          <stringProp name="ConstantTimer.delay">${__P(TIMER_DELAY,100)}</stringProp>
+        </ConstantTimer>
+        <hashTree/>
+
+        <!-- Request A – instabil -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Unstable Request A" enabled="true">
           <stringProp name="HTTPSampler.domain">host.docker.internal</stringProp>
-          <stringProp name="HTTPSampler.port">8081</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.path">/unstable</stringProp>
+          <stringProp name="HTTPSampler.path">/call-a-unstable</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
+
+        <!-- Request B – stabil -->
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Data Request B" enabled="true">
           <stringProp name="HTTPSampler.domain">host.docker.internal</stringProp>
-          <stringProp name="HTTPSampler.port">8082</stringProp>
+          <stringProp name="HTTPSampler.port">8080</stringProp>
           <stringProp name="HTTPSampler.protocol">http</stringProp>
-          <stringProp name="HTTPSampler.path">/data</stringProp>
+          <stringProp name="HTTPSampler.path">/call-b</stringProp>
           <stringProp name="HTTPSampler.method">GET</stringProp>
         </HTTPSamplerProxy>
         <hashTree/>
