@@ -42,30 +42,30 @@ if [ -z "$SPRING_PROFILES_ACTIVE" ] || [ -z "$SPRING_PROFILES_ACTIVE_BACKEND_A" 
 
     echo "SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE" > "$ENV_FILE"
     echo "SPRING_PROFILES_ACTIVE_BACKEND_A=$SPRING_PROFILES_ACTIVE_BACKEND_A" >> "$ENV_FILE"
-    echo "💾 Profile wurden in $ENV_FILE gespeichert."
+    echo "Profile wurden in $ENV_FILE gespeichert."
 else
-    echo "✅ Profile aus .env verwendet:"
-    echo "   Client (myservice):      SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE"
-    echo "   Server (backend-a):      SPRING_PROFILES_ACTIVE_BACKEND_A=$SPRING_PROFILES_ACTIVE_BACKEND_A"
+    echo "Profile aus .env verwendet:"
+    echo "Client (myservice):      SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE"
+    echo "Server (backend-a):      SPRING_PROFILES_ACTIVE_BACKEND_A=$SPRING_PROFILES_ACTIVE_BACKEND_A"
 fi
 
-echo "🔍 Überprüfe Voraussetzungen..."
+echo " Überprüfe Voraussetzungen..."
 
 # Prüfe ob docker installiert ist
 if ! command -v docker &> /dev/null
 then
-    echo "❌ Docker ist nicht installiert oder nicht im PATH."
+    echo "Docker ist nicht installiert oder nicht im PATH."
     exit 1
 fi
 
 # Prüfe ob docker-compose installiert ist
 if ! command -v docker-compose &> /dev/null
 then
-    echo "❌ docker-compose ist nicht installiert oder nicht im PATH."
+    echo "docker-compose ist nicht installiert oder nicht im PATH."
     exit 1
 fi
 
-echo "✅ Voraussetzungen erfüllt."
+echo "Voraussetzungen erfüllt."
 
 # Docker Umgebung beenden, falls noch alte Container laufen
 echo ""

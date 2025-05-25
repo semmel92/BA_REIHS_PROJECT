@@ -50,7 +50,3 @@ backend:
     unstableUrl: http://backend-a-1:8080/unstable
   b:
     url: http://backend-b-1:8080/data
-
-logging:
-  level:
-    io.github.resilience4j.circuitbreaker: DEBUG

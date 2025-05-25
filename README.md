@@ -111,6 +111,7 @@ L1 - circuitbreaker_test.jmx || serverbreaker_test.jmx
         <stringProp name="ThreadGroup.num_threads">20</stringProp>
         <stringProp name="ThreadGroup.ramp_time">10</stringProp>
         <stringProp name="LoopController.loops">50</stringProp>
+        TIMER_DELAY=5
 
 BackendAController.java
 
@@ -128,6 +129,8 @@ L2 - circuitbreaker_test.jmx
         <stringProp name="ThreadGroup.num_threads">100</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <stringProp name="LoopController.loops">100</stringProp>
+        TIMER_DELAY=0
+
 
 BackendAController.java
 
@@ -145,7 +148,7 @@ L3 - circuitbreaker_test.jmx
         <stringProp name="ThreadGroup.num_threads">500</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <stringProp name="LoopController.loops">150</stringProp>
-
+        TIMER_DELAY=0
 BackendAController.java
 
     @GetMapping("/unstable")
