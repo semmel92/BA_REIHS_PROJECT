@@ -1,20 +1,21 @@
 package com.example.myservice;
 
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
-import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.EnableRetry;
-import org.springframework.retry.annotation.Recover;
-import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-@Profile("retry") 
+@Profile("retry")
 @EnableRetry
 public class RetryingBackendCallerService implements BackendCaller {
 
     private final RestTemplate restTemplate;
+    private final RetryWorker retryWorker;
+    private final Counter retryUnstableCounter;
 
     @Value("${backend.a.url}")
     private String backendAUrl;
@@ -22,27 +23,35 @@ public class RetryingBackendCallerService implements BackendCaller {
     @Value("${backend.b.url}")
     private String backendBUrl;
 
-    public RetryingBackendCallerService(RestTemplate restTemplate) {
+    @Value("${backend.a.unstableUrl}")
+    private String unstableUrl;
+
+    public RetryingBackendCallerService(RestTemplate restTemplate, RetryWorker retryWorker, MeterRegistry registry) {
         this.restTemplate = restTemplate;
+        this.retryWorker = retryWorker;
+        this.retryUnstableCounter = Counter.builder("retry_total")
+            .description("Zählt fehlgeschlagene Retry-Ketten bei /call-a-unstable")
+            .tag("uri", "/call-a-unstable")
+            .register(registry);
     }
 
-    @Retryable(maxAttempts = 3, backoff = @Backoff(delay = 1000))
+    @Override
     public String callBackendA() {
-        return restTemplate.getForObject(backendAUrl, String.class);
+        return retryWorker.call(restTemplate, backendAUrl);
     }
 
-    @Retryable(maxAttempts = 3, backoff = @Backoff(delay = 1000))
+    @Override
     public String callBackendB() {
-        return restTemplate.getForObject(backendBUrl, String.class);
+        return retryWorker.call(restTemplate, backendBUrl);
     }
 
     @Override
     public String callUnstable() {
-        return "RetryingBackendCallerService: /unstable wird in diesem Profil nicht verwendet.";
-    }
-
-    @Recover
-    public String recoverBackend(Exception e) {
-        return "❌ Backend konnte nicht erreicht werden: " + e.getMessage();
+        try {
+            return retryWorker.call(restTemplate, unstableUrl);
+        } catch (Exception e) {
+            retryUnstableCounter.increment();
+            return "Instabiles Backend (A) nicht verfügbar: " + e.getMessage();
+        }
     }
 }

@@ -1,0 +1,55 @@
+Laststufe,Gruppe,Metrik,Wert
+L1,backend-a-1,Durchschnittliche CPU-Auslastung,5103.5 %
+L1,backend-b-1,Durchschnittliche CPU-Auslastung,4442.5 %
+L1,myservice,Durchschnittliche CPU-Auslastung,1997.4 %
+L2,backend-a-1,Durchschnittliche CPU-Auslastung,2107.7 %
+L2,backend-b-1,Durchschnittliche CPU-Auslastung,929.8 %
+L2,myservice,Durchschnittliche CPU-Auslastung,1772.1 %
+L3,backend-a-1,Durchschnittliche CPU-Auslastung,670.3 %
+L3,backend-b-1,Durchschnittliche CPU-Auslastung,1000.2 %
+L3,myservice,Durchschnittliche CPU-Auslastung,117.3 %
+L1,backend-a-1,Durchschnittlicher RAM-Verbrauch,276.5 MB
+L1,backend-b-1,Durchschnittlicher RAM-Verbrauch,262.2 MB
+L1,myservice,Durchschnittlicher RAM-Verbrauch,686.9 MB
+L2,backend-a-1,Durchschnittlicher RAM-Verbrauch,494.3 MB
+L2,backend-b-1,Durchschnittlicher RAM-Verbrauch,339.4 MB
+L2,myservice,Durchschnittlicher RAM-Verbrauch,559.1 MB
+L3,backend-a-1,Durchschnittlicher RAM-Verbrauch,459.4 MB
+L3,backend-b-1,Durchschnittlicher RAM-Verbrauch,527.2 MB
+L3,myservice,Durchschnittlicher RAM-Verbrauch,644.4 MB
+L1,backend-a-1,RAM-Verbrauch (Maximum),292.6 MB
+L1,backend-b-1,RAM-Verbrauch (Maximum),285.1 MB
+L1,myservice,RAM-Verbrauch (Maximum),688.1 MB
+L2,backend-a-1,RAM-Verbrauch (Maximum),594.5 MB
+L2,backend-b-1,RAM-Verbrauch (Maximum),379.3 MB
+L2,myservice,RAM-Verbrauch (Maximum),632.3 MB
+L3,backend-a-1,RAM-Verbrauch (Maximum),477.4 MB
+L3,backend-b-1,RAM-Verbrauch (Maximum),546.5 MB
+L3,myservice,RAM-Verbrauch (Maximum),644.7 MB
+L1,backend-a-1,Gesamte Empfangene Bytes,81.2 KB
+L1,backend-b-1,Gesamte Empfangene Bytes,79.5 KB
+L1,myservice,Gesamte Empfangene Bytes,5.1 KB
+L2,backend-a-1,Gesamte Empfangene Bytes,318.8 KB
+L2,backend-b-1,Gesamte Empfangene Bytes,385.5 KB
+L2,myservice,Gesamte Empfangene Bytes,1.6 MB
+L3,backend-a-1,Gesamte Empfangene Bytes,6.3 KB
+L3,backend-b-1,Gesamte Empfangene Bytes,1.2 MB
+L3,myservice,Gesamte Empfangene Bytes,5.7 KB
+L1,backend-a-1,Gesamte Übertragene Bytes,83.0 KB
+L1,backend-b-1,Gesamte Übertragene Bytes,90.8 KB
+L1,myservice,Gesamte Übertragene Bytes,203.4 KB
+L2,backend-a-1,Gesamte Übertragene Bytes,338.2 KB
+L2,backend-b-1,Gesamte Übertragene Bytes,405.8 KB
+L2,myservice,Gesamte Übertragene Bytes,2.0 MB
+L3,backend-a-1,Gesamte Übertragene Bytes,6.8 KB
+L3,backend-b-1,Gesamte Übertragene Bytes,1.3 MB
+L3,myservice,Gesamte Übertragene Bytes,225.9 KB
+L1,myservice:8080,Fallback-Anzahl pro Instanz (circuitbreaker),2219
+L2,myservice:8080,Fallback-Anzahl pro Instanz (circuitbreaker),2193
+L3,myservice:8080,Fallback-Anzahl pro Instanz (circuitbreaker),18825
+L1,call-a-unstable,Fallback-Quote in % (circuitbreaker),27.8 %
+L2,call-a-unstable,Fallback-Quote in % (circuitbreaker),inf %
+L3,call-a-unstable,Fallback-Quote in % (circuitbreaker),96.8 %
+L1,call-a-unstable,Erfolgsquote unter Berücksichtigung von Fallbacks,78.2 %
+L2,call-a-unstable,Erfolgsquote unter Berücksichtigung von Fallbacks,55.7 %
+L3,call-a-unstable,Erfolgsquote unter Berücksichtigung von Fallbacks,51.0 %

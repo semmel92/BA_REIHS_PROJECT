@@ -72,3 +72,4 @@ echo "✅ Test abgeschlossen in ${duration} Sekunden."
 echo "📁 Ergebnisse: $RESULT_DIR"
 echo "📊 HTML-Report: $RESULT_DIR/report/index.html"
 echo "📄 JMeter-Daten: $RESULT_DIR/$JMETER_RESULTS_FILE"
+

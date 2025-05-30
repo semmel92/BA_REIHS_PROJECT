@@ -1,0 +1,52 @@
+Laststufe,Gruppe,Metrik,Wert
+L1,backend-a-1,Durchschnittliche CPU-Auslastung,90.9 %
+L1,backend-b-1,Durchschnittliche CPU-Auslastung,20092.2 %
+L1,myservice,Durchschnittliche CPU-Auslastung,20844.8 %
+L2,backend-a-1,Durchschnittliche CPU-Auslastung,111.8 %
+L2,backend-b-1,Durchschnittliche CPU-Auslastung,1886.3 %
+L2,myservice,Durchschnittliche CPU-Auslastung,6054.0 %
+L3,backend-a-1,Durchschnittliche CPU-Auslastung,15.7 %
+L3,backend-b-1,Durchschnittliche CPU-Auslastung,678.1 %
+L3,myservice,Durchschnittliche CPU-Auslastung,19.2 %
+L1,backend-a-1,Durchschnittlicher RAM-Verbrauch,306.2 MB
+L1,backend-b-1,Durchschnittlicher RAM-Verbrauch,249.0 MB
+L1,myservice,Durchschnittlicher RAM-Verbrauch,418.6 MB
+L2,backend-a-1,Durchschnittlicher RAM-Verbrauch,307.3 MB
+L2,backend-b-1,Durchschnittlicher RAM-Verbrauch,317.5 MB
+L2,myservice,Durchschnittlicher RAM-Verbrauch,752.1 MB
+L3,backend-a-1,Durchschnittlicher RAM-Verbrauch,509.3 MB
+L3,backend-b-1,Durchschnittlicher RAM-Verbrauch,617.9 MB
+L3,myservice,Durchschnittlicher RAM-Verbrauch,737.1 MB
+L1,backend-a-1,RAM-Verbrauch (Maximum),307.4 MB
+L1,backend-b-1,RAM-Verbrauch (Maximum),297.1 MB
+L1,myservice,RAM-Verbrauch (Maximum),592.2 MB
+L2,backend-a-1,RAM-Verbrauch (Maximum),307.4 MB
+L2,backend-b-1,RAM-Verbrauch (Maximum),324.8 MB
+L2,myservice,RAM-Verbrauch (Maximum),835.5 MB
+L3,backend-a-1,RAM-Verbrauch (Maximum),510.8 MB
+L3,backend-b-1,RAM-Verbrauch (Maximum),642.7 MB
+L3,myservice,RAM-Verbrauch (Maximum),737.2 MB
+L1,backend-a-1,Gesamte Empfangene Bytes,357.7 B
+L1,backend-b-1,Gesamte Empfangene Bytes,23.8 KB
+L1,myservice,Gesamte Empfangene Bytes,142.9 KB
+L2,backend-a-1,Gesamte Empfangene Bytes,492.5 KB
+L2,backend-b-1,Gesamte Empfangene Bytes,0.0 B
+L2,myservice,Gesamte Empfangene Bytes,2.2 MB
+L3,backend-a-1,Gesamte Empfangene Bytes,990.8 KB
+L3,backend-b-1,Gesamte Empfangene Bytes,587.2 KB
+L3,myservice,Gesamte Empfangene Bytes,4.0 MB
+L1,backend-a-1,Gesamte Übertragene Bytes,130.6 B
+L1,backend-b-1,Gesamte Übertragene Bytes,38.0 KB
+L1,myservice,Gesamte Übertragene Bytes,185.9 KB
+L2,backend-a-1,Gesamte Übertragene Bytes,513.2 KB
+L2,backend-b-1,Gesamte Übertragene Bytes,0.0 B
+L2,myservice,Gesamte Übertragene Bytes,2.5 MB
+L3,backend-a-1,Gesamte Übertragene Bytes,1007.6 KB
+L3,backend-b-1,Gesamte Übertragene Bytes,971.4 KB
+L3,myservice,Gesamte Übertragene Bytes,4.4 MB
+L1,myservice:8080,Fehleranzahl 5xx pro Instanz,0
+L2,myservice:8080,Fehleranzahl 5xx pro Instanz,3370
+L3,myservice:8080,Fehleranzahl 5xx pro Instanz,9923
+L1,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,100.0 %
+L2,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,32.2 %
+L3,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,5.6 %

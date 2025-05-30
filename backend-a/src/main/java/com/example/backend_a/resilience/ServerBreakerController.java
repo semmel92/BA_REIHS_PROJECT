@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Profile("serverbreaker")
-@RequestMapping("/data")
+@RequestMapping("/unstable")
 public class ServerBreakerController {
 
     private final ServerSideCircuitBreaker circuitBreaker;

@@ -1,0 +1,55 @@
+Laststufe,Gruppe,Metrik,Wert
+L1,backend-a-1,Durchschnittliche CPU-Auslastung,2217.1 %
+L1,backend-b-1,Durchschnittliche CPU-Auslastung,68.2 %
+L1,myservice,Durchschnittliche CPU-Auslastung,2070.5 %
+L2,backend-a-1,Durchschnittliche CPU-Auslastung,1494.9 %
+L2,backend-b-1,Durchschnittliche CPU-Auslastung,1341.0 %
+L2,myservice,Durchschnittliche CPU-Auslastung,1603.9 %
+L3,backend-a-1,Durchschnittliche CPU-Auslastung,303.6 %
+L3,backend-b-1,Durchschnittliche CPU-Auslastung,224.0 %
+L3,myservice,Durchschnittliche CPU-Auslastung,406.5 %
+L1,backend-a-1,Durchschnittlicher RAM-Verbrauch,254.3 MB
+L1,backend-b-1,Durchschnittlicher RAM-Verbrauch,320.0 MB
+L1,myservice,Durchschnittlicher RAM-Verbrauch,627.5 MB
+L2,backend-a-1,Durchschnittlicher RAM-Verbrauch,389.5 MB
+L2,backend-b-1,Durchschnittlicher RAM-Verbrauch,295.7 MB
+L2,myservice,Durchschnittlicher RAM-Verbrauch,775.1 MB
+L3,backend-a-1,Durchschnittlicher RAM-Verbrauch,271.4 MB
+L3,backend-b-1,Durchschnittlicher RAM-Verbrauch,307.9 MB
+L3,myservice,Durchschnittlicher RAM-Verbrauch,678.2 MB
+L1,backend-a-1,RAM-Verbrauch (Maximum),270.5 MB
+L1,backend-b-1,RAM-Verbrauch (Maximum),320.2 MB
+L1,myservice,RAM-Verbrauch (Maximum),677.5 MB
+L2,backend-a-1,RAM-Verbrauch (Maximum),430.8 MB
+L2,backend-b-1,RAM-Verbrauch (Maximum),304.0 MB
+L2,myservice,RAM-Verbrauch (Maximum),788.3 MB
+L3,backend-a-1,RAM-Verbrauch (Maximum),273.3 MB
+L3,backend-b-1,RAM-Verbrauch (Maximum),310.0 MB
+L3,myservice,RAM-Verbrauch (Maximum),680.7 MB
+L1,backend-a-1,Gesamte Empfangene Bytes,131.9 KB
+L1,backend-b-1,Gesamte Empfangene Bytes,129.4 KB
+L1,myservice,Gesamte Empfangene Bytes,831.2 KB
+L2,backend-a-1,Gesamte Empfangene Bytes,445.8 KB
+L2,backend-b-1,Gesamte Empfangene Bytes,233.8 KB
+L2,myservice,Gesamte Empfangene Bytes,1.6 MB
+L3,backend-a-1,Gesamte Empfangene Bytes,2.7 MB
+L3,backend-b-1,Gesamte Empfangene Bytes,421.3 KB
+L3,myservice,Gesamte Empfangene Bytes,5.1 MB
+L1,backend-a-1,Gesamte Übertragene Bytes,136.0 KB
+L1,backend-b-1,Gesamte Übertragene Bytes,148.6 KB
+L1,myservice,Gesamte Übertragene Bytes,1.1 MB
+L2,backend-a-1,Gesamte Übertragene Bytes,488.0 KB
+L2,backend-b-1,Gesamte Übertragene Bytes,256.5 KB
+L2,myservice,Gesamte Übertragene Bytes,1.9 MB
+L3,backend-a-1,Gesamte Übertragene Bytes,3.1 MB
+L3,backend-b-1,Gesamte Übertragene Bytes,439.2 KB
+L3,myservice,Gesamte Übertragene Bytes,5.2 MB
+L1,myservice:8080,Anzahl abgefangener Fehler (retry),54
+L2,myservice:8080,Anzahl abgefangener Fehler (retry),169
+L3,myservice:8080,Anzahl abgefangener Fehler (retry),16064
+L1,unbekannt,Fehlerrate in % (retry),1.9 %
+L2,unbekannt,Fehlerrate in % (retry),1.6 %
+L3,unbekannt,Fehlerrate in % (retry),49.2 %
+L1,unbekannt,Erfolgsquote unter Berücksichtigung von Retries,98.1 %
+L2,unbekannt,Erfolgsquote unter Berücksichtigung von Retries,98.4 %
+L3,unbekannt,Erfolgsquote unter Berücksichtigung von Retries,50.8 %
