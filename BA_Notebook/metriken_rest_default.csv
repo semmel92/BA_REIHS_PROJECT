@@ -1,0 +1,52 @@
+Laststufe,Gruppe,Metrik,Wert
+L1,backend-a-1,Durchschnittliche CPU-Auslastung,554.0 %
+L1,backend-b-1,Durchschnittliche CPU-Auslastung,537.8 %
+L1,myservice,Durchschnittliche CPU-Auslastung,15.3 %
+L2,backend-a-1,Durchschnittliche CPU-Auslastung,2014.7 %
+L2,backend-b-1,Durchschnittliche CPU-Auslastung,4160.9 %
+L2,myservice,Durchschnittliche CPU-Auslastung,9092.6 %
+L3,backend-a-1,Durchschnittliche CPU-Auslastung,543.4 %
+L3,backend-b-1,Durchschnittliche CPU-Auslastung,1269.1 %
+L3,myservice,Durchschnittliche CPU-Auslastung,2907.2 %
+L1,backend-a-1,Durchschnittlicher RAM-Verbrauch,397.1 MB
+L1,backend-b-1,Durchschnittlicher RAM-Verbrauch,402.4 MB
+L1,myservice,Durchschnittlicher RAM-Verbrauch,432.9 MB
+L2,backend-a-1,Durchschnittlicher RAM-Verbrauch,247.1 MB
+L2,backend-b-1,Durchschnittlicher RAM-Verbrauch,275.2 MB
+L2,myservice,Durchschnittlicher RAM-Verbrauch,440.7 MB
+L3,backend-a-1,Durchschnittlicher RAM-Verbrauch,249.9 MB
+L3,backend-b-1,Durchschnittlicher RAM-Verbrauch,321.5 MB
+L3,myservice,Durchschnittlicher RAM-Verbrauch,711.7 MB
+L1,backend-a-1,RAM-Verbrauch (Maximum),421.1 MB
+L1,backend-b-1,RAM-Verbrauch (Maximum),417.7 MB
+L1,myservice,RAM-Verbrauch (Maximum),440.3 MB
+L2,backend-a-1,RAM-Verbrauch (Maximum),260.6 MB
+L2,backend-b-1,RAM-Verbrauch (Maximum),321.5 MB
+L2,myservice,RAM-Verbrauch (Maximum),611.0 MB
+L3,backend-a-1,RAM-Verbrauch (Maximum),257.7 MB
+L3,backend-b-1,RAM-Verbrauch (Maximum),425.6 MB
+L3,myservice,RAM-Verbrauch (Maximum),783.9 MB
+L1,backend-a-1,Gesamte Empfangene Bytes,1.2 MB
+L1,backend-b-1,Gesamte Empfangene Bytes,1.2 MB
+L1,myservice,Gesamte Empfangene Bytes,0.007 MB
+L2,backend-a-1,Gesamte Empfangene Bytes,0.001 MB
+L2,backend-b-1,Gesamte Empfangene Bytes,0.8 MB
+L2,myservice,Gesamte Empfangene Bytes,3.1 MB
+L3,backend-a-1,Gesamte Empfangene Bytes,0.00007 MB
+L3,backend-b-1,Gesamte Empfangene Bytes,0.7 MB
+L3,myservice,Gesamte Empfangene Bytes,3.0 MB
+L1,backend-a-1,Gesamte Übertragene Bytes,1.2 MB
+L1,backend-b-1,Gesamte Übertragene Bytes,1.3 MB
+L1,myservice,Gesamte Übertragene Bytes,0.144 MB
+L2,backend-a-1,Gesamte Übertragene Bytes,0.0003 MB
+L2,backend-b-1,Gesamte Übertragene Bytes,0.8 MB
+L2,myservice,Gesamte Übertragene Bytes,3.7 MB
+L3,backend-a-1,Gesamte Übertragene Bytes,0.0003 MB
+L3,backend-b-1,Gesamte Übertragene Bytes,0.7 MB
+L3,myservice,Gesamte Übertragene Bytes,3.6 MB
+L1,myservice:8080,Fehleranzahl 5xx pro Instanz,0
+L2,myservice:8080,Fehleranzahl 5xx pro Instanz,1617 
+L3,myservice:8080,Fehleranzahl 5xx pro Instanz,10242
+L1,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,100.0 %
+L2,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,70.3 %
+L3,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,0.0 %

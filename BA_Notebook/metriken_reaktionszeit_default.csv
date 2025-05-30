@@ -1,0 +1,19 @@
+Laststufe,Gruppe,Metrik,Wert
+L1,/data,Durchschnittliche Reaktionszeit im Testzeitraum,0.002 s
+L1,/unstable,Durchschnittliche Reaktionszeit im Testzeitraum,0.002 s
+L2,/data,Durchschnittliche Reaktionszeit im Testzeitraum,0.005 s
+L2,/unstable,Durchschnittliche Reaktionszeit im Testzeitraum,0.012 s
+L3,/data,Durchschnittliche Reaktionszeit im Testzeitraum,0.001 s
+L3,/unstable,Durchschnittliche Reaktionszeit im Testzeitraum,0.015 s
+L1,/data,95. Perzentil der Reaktionszeit im Testzeitraum,0.003 s
+L1,/unstable,95. Perzentil der Reaktionszeit im Testzeitraum,0.004 s
+L2,/data,95. Perzentil der Reaktionszeit im Testzeitraum,0.022 s
+L2,/unstable,95. Perzentil der Reaktionszeit im Testzeitraum,0.050 s
+L3,/data,95. Perzentil der Reaktionszeit im Testzeitraum,0.004 s
+L3,/unstable,95. Perzentil der Reaktionszeit im Testzeitraum,0.073 s
+L1,/data,Maximale Antwortzeit im Testzeitraum,0.084 s
+L1,/unstable,Maximale Antwortzeit im Testzeitraum,0.081 s
+L2,/data,Maximale Antwortzeit im Testzeitraum,0.216 s
+L2,/unstable,Maximale Antwortzeit im Testzeitraum,0.241 s
+L3,/data,Maximale Antwortzeit im Testzeitraum,0.063 s
+L3,/unstable,Maximale Antwortzeit im Testzeitraum,0.322 s
