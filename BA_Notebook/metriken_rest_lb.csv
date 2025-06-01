@@ -1,0 +1,82 @@
+Laststufe,Gruppe,Metrik,Wert
+L1,backend-a-1,Durchschnittliche CPU-Auslastung,9164.5 %
+L1,backend-b-1,Durchschnittliche CPU-Auslastung,58.3 %
+L1,backend-a-2,Durchschnittliche CPU-Auslastung,15.3 %
+L1,myservice,Durchschnittliche CPU-Auslastung,125.7 %
+L1,backend-b-2,Durchschnittliche CPU-Auslastung,10912.6 %
+L2,backend-a-1,Durchschnittliche CPU-Auslastung,2632.8 %
+L2,backend-b-1,Durchschnittliche CPU-Auslastung,56.3 %
+L2,backend-a-2,Durchschnittliche CPU-Auslastung,2653.8 %
+L2,myservice,Durchschnittliche CPU-Auslastung,5417.9 %
+L2,backend-b-2,Durchschnittliche CPU-Auslastung,3198.2 %
+L3,backend-a-1,Durchschnittliche CPU-Auslastung,455.6 %
+L3,backend-b-1,Durchschnittliche CPU-Auslastung,490.7 %
+L3,backend-a-2,Durchschnittliche CPU-Auslastung,507.3 %
+L3,myservice,Durchschnittliche CPU-Auslastung,1575.4 %
+L3,backend-b-2,Durchschnittliche CPU-Auslastung,164.5 %
+L1,backend-a-1,Durchschnittlicher RAM-Verbrauch,222.5 MB
+L1,backend-b-1,Durchschnittlicher RAM-Verbrauch,316.0 MB
+L1,backend-a-2,Durchschnittlicher RAM-Verbrauch,362.1 MB
+L1,myservice,Durchschnittlicher RAM-Verbrauch,902.4 MB
+L1,backend-b-2,Durchschnittlicher RAM-Verbrauch,214.4 MB
+L2,backend-a-1,Durchschnittlicher RAM-Verbrauch,274.8 MB
+L2,backend-b-1,Durchschnittlicher RAM-Verbrauch,316.5 MB
+L2,backend-a-2,Durchschnittlicher RAM-Verbrauch,376.6 MB
+L2,myservice,Durchschnittlicher RAM-Verbrauch,691.2 MB
+L2,backend-b-2,Durchschnittlicher RAM-Verbrauch,261.0 MB
+L3,backend-a-1,Durchschnittlicher RAM-Verbrauch,473.9 MB
+L3,backend-b-1,Durchschnittlicher RAM-Verbrauch,352.4 MB
+L3,backend-a-2,Durchschnittlicher RAM-Verbrauch,475.1 MB
+L3,myservice,Durchschnittlicher RAM-Verbrauch,895.7 MB
+L3,backend-b-2,Durchschnittlicher RAM-Verbrauch,342.3 MB
+L1,backend-a-1,RAM-Verbrauch (Maximum),292.7 MB
+L1,backend-b-1,RAM-Verbrauch (Maximum),316.6 MB
+L1,backend-a-2,RAM-Verbrauch (Maximum),363.8 MB
+L1,myservice,RAM-Verbrauch (Maximum),902.8 MB
+L1,backend-b-2,RAM-Verbrauch (Maximum),275.8 MB
+L2,backend-a-1,RAM-Verbrauch (Maximum),297.0 MB
+L2,backend-b-1,RAM-Verbrauch (Maximum),316.6 MB
+L2,backend-a-2,RAM-Verbrauch (Maximum),434.0 MB
+L2,myservice,RAM-Verbrauch (Maximum),797.8 MB
+L2,backend-b-2,RAM-Verbrauch (Maximum),281.0 MB
+L3,backend-a-1,RAM-Verbrauch (Maximum),478.2 MB
+L3,backend-b-1,RAM-Verbrauch (Maximum),357.1 MB
+L3,backend-a-2,RAM-Verbrauch (Maximum),476.4 MB
+L3,myservice,RAM-Verbrauch (Maximum),935.0 MB
+L3,backend-b-2,RAM-Verbrauch (Maximum),342.4 MB
+L1,backend-a-1,Gesamte Empfangene Bytes,2.8 KB
+L1,backend-b-1,Gesamte Empfangene Bytes,1.9 KB
+L1,backend-a-2,Gesamte Empfangene Bytes,1.5 KB
+L1,myservice,Gesamte Empfangene Bytes,1.8 KB
+L1,backend-b-2,Gesamte Empfangene Bytes,3.4 KB
+L2,backend-a-1,Gesamte Empfangene Bytes,155.5 KB
+L2,backend-b-1,Gesamte Empfangene Bytes,113.3 KB
+L2,backend-a-2,Gesamte Empfangene Bytes,142.8 KB
+L2,myservice,Gesamte Empfangene Bytes,1.8 MB
+L2,backend-b-2,Gesamte Empfangene Bytes,140.4 KB
+L3,backend-a-1,Gesamte Empfangene Bytes,542.2 KB
+L3,backend-b-1,Gesamte Empfangene Bytes,229.0 KB
+L3,backend-a-2,Gesamte Empfangene Bytes,290.2 KB
+L3,myservice,Gesamte Empfangene Bytes,3.7 MB
+L3,backend-b-2,Gesamte Empfangene Bytes,288.4 KB
+L1,backend-a-1,Gesamte Übertragene Bytes,1.6 KB
+L1,backend-b-1,Gesamte Übertragene Bytes,1.7 KB
+L1,backend-a-2,Gesamte Übertragene Bytes,1.4 KB
+L1,myservice,Gesamte Übertragene Bytes,47.9 KB
+L1,backend-b-2,Gesamte Übertragene Bytes,2.1 KB
+L2,backend-a-1,Gesamte Übertragene Bytes,165.8 KB
+L2,backend-b-1,Gesamte Übertragene Bytes,124.6 KB
+L2,backend-a-2,Gesamte Übertragene Bytes,226.6 KB
+L2,myservice,Gesamte Übertragene Bytes,2.0 MB
+L2,backend-b-2,Gesamte Übertragene Bytes,225.2 KB
+L3,backend-a-1,Gesamte Übertragene Bytes,619.2 KB
+L3,backend-b-1,Gesamte Übertragene Bytes,257.4 KB
+L3,backend-a-2,Gesamte Übertragene Bytes,470.3 KB
+L3,myservice,Gesamte Übertragene Bytes,3.9 MB
+L3,backend-b-2,Gesamte Übertragene Bytes,468.9 KB
+L1,myservice:8080,Fehleranzahl 5xx pro Instanz,362
+L2,myservice:8080,Fehleranzahl 5xx pro Instanz,3321
+L3,myservice:8080,Fehleranzahl 5xx pro Instanz,9545
+L1,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,97.3 %
+L2,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,77.6 %
+L3,/call-a-unstable,Verfügbarkeit in % – /call-a-unstable und /call-b-data,15.8 %

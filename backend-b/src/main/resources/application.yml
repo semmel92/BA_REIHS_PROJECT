@@ -7,6 +7,8 @@ info:
 spring:
   application:
     name: backend-b
+    instance-id: ${INSTANCE_NAME:backend-b-default}
+
   cloud:
     discovery:
       enabled: true

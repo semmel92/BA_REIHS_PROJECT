@@ -16,6 +16,13 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+backend:
+  a:
+    url: http://backend-a/data
+    unstableUrl: http://backend-a/unstable
+  b:
+    url: http://backend-b/data
+
 eureka:
   client:
     service-url:

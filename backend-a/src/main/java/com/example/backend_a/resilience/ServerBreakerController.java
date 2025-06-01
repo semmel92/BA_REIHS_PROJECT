@@ -26,7 +26,7 @@ public class ServerBreakerController {
         try {
             double randomValue = Math.random();
             System.out.println("Zufallswert: " + randomValue);
-            if (randomValue < 1.0) {
+            if (randomValue < 0.0) {
                 throw new RuntimeException("Simulierter Fehler");
             }
 

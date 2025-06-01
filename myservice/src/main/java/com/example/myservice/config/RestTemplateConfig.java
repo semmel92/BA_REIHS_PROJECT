@@ -38,6 +38,7 @@ public class RestTemplateConfig {
                     .publishPercentileHistogram()
                     .tag("uri", request.getURI().getPath())
                     .tag("method", request.getMethod().name())
+                    .tag("targetHost", request.getURI().getHost())
                     .register(registry)
                 );
             }
